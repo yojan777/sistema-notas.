@@ -54,3 +54,22 @@ def clasificar_nota(nota: float) -> str:
         return "Regular"
     else:
         return "Deficiente"
+ def reporte(notas: list[float]) -> dict:
+    """
+    Genera un reporte estadístico de las notas.
+    
+    Args:
+        notas (list[float]): Lista de notas.
+        
+    Returns:
+        dict: Diccionario con promedio, aprobados y clasificación general.
+    """
+    promedio = calcular_promedio(notas)
+    aprobados = sum(1 for n in notas if esta_aprobado(n))
+    return {
+        "promedio": round(promedio, 2),
+        "total_notas": len(notas),
+        "aprobados": aprobados,
+        "reprobados": len(notas) - aprobados,
+        "clasificacion_promedio": clasificar_nota(promedio)
+    }
